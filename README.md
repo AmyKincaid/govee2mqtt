@@ -5,19 +5,26 @@ as a bridge between [Govee](https://govee.com) devices and Home Assistant,
 via the [Home Assistant MQTT Integration](https://www.home-assistant.io/integrations/mqtt/).
 
 > **Unofficial fork** of [wez/govee2mqtt](https://github.com/wez/govee2mqtt)
-> that bundles two not-yet-merged upstream fixes:
->
-> * [#656](https://github.com/wez/govee2mqtt/pull/656) - 2FA login support for Govee accounts
-> * [#739](https://github.com/wez/govee2mqtt/pull/739) - fetch Tap-to-Run shortcuts with the account token
->
-> The Home Assistant add-on and container images are built from this fork
-> (`ghcr.io/amykincaid/govee2mqtt`).
+> (all credit for the project goes to Wez Furlong). This fork only adds two
+> fixes that are not yet merged upstream, so the add-on keeps working today.
+
+## What this fork fixes
+
+|Problem|Fix|Upstream PR|
+|-------|---|-----------|
+|**2FA login:** Govee now requires an email verification code for many accounts, so the login to the undocumented API fails (status 454) and no IoT features work.|On 454 the code is requested by email; enter it via the new `govee_2fa_code` option, `GOVEE_2FA_CODE` or `--govee-2fa-code`. Also updates the app version/user agent sent to Govee.|[#656](https://github.com/wez/govee2mqtt/pull/656) by @nungster|
+|**Tap-to-Run:** one-click scenes fail with `authorization token is invalid` and new ones don't appear after purging caches ([#737](https://github.com/wez/govee2mqtt/issues/737)).|Tap-to-Run shortcuts are fetched with the main account token instead of the community-api token.|[#739](https://github.com/wez/govee2mqtt/pull/739) by @UPEngineer|
+
+Everything else is identical to upstream. Once both PRs are released
+upstream, switch back to the official add-on. Add-on and container images
+of this fork are published as `ghcr.io/amykincaid/govee2mqtt`.
 
 ### Installing this fork as a Home Assistant add-on
 
-1. In Home Assistant: Settings > Add-ons > Add-on Store > ⋮ > Repositories.
+1. In Home Assistant: Settings > Add-ons > Add-on Store > three-dot menu > Repositories.
 2. Add `https://github.com/AmyKincaid/govee2mqtt` and install
-   "Govee to MQTT Bridge (2FA fork)". See [docs/ADDON.md](docs/ADDON.md).
+   "Govee to MQTT Bridge (2FA + Tap-to-Run fix)". See [docs/ADDON.md](docs/ADDON.md).
+3. Stop the official add-on first, otherwise devices are published twice.
 
 ### 2FA login
 
@@ -26,7 +33,6 @@ status 454 and Govee emails a verification code to your account.
 Enter that code in the add-on option `govee_2fa_code` (Docker:
 `GOVEE_2FA_CODE`, CLI: `--govee-2fa-code`) and restart. Once running you
 can clear the option; the code is single-use.
-
 ## Features
 
 * Robust LAN-first design. Not all of Govee's devices support LAN control,
@@ -68,17 +74,21 @@ can clear the option; the code is single-use.
 
 ## Want to show your support or gratitude?
 
+The project itself is written and maintained by Wez Furlong. The links below
+are **his** sponsor links (the original author), not mine; this fork only adds
+the two small fixes above.
+
 It takes significant effort to build, maintain and support users of software
 like this. If you can spare something to say thanks, it is appreciated!
 
-* [Sponsor me on Github](https://github.com/sponsors/wez)
-* [Sponsor me on Patreon](https://patreon.com/WezFurlong)
-* [Sponsor me on Ko-Fi](https://ko-fi.com/wezfurlong)
-* [Sponsor me via liberapay](https://liberapay.com/wez)
+* [Sponsor Wez on Github](https://github.com/sponsors/wez)
+* [Sponsor Wez on Patreon](https://patreon.com/WezFurlong)
+* [Sponsor Wez on Ko-Fi](https://ko-fi.com/wezfurlong)
+* [Sponsor Wez via liberapay](https://liberapay.com/wez)
 
 ## Credits
 
-This work is based on my earlier work with [Govee LAN
+This work is based on Wez Furlong's earlier work with [Govee LAN
 Control](https://github.com/wez/govee-lan-hass/).
 
 The AWS IoT support was made possible by the work of @bwp91 in

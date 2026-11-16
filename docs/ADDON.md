@@ -82,7 +82,7 @@ when we get to that point.
 2. After a couple of seconds, your devices should be discovered and show up under the MQTT integration
 
 
-## Using the 2FA fork
+## Using this fork (2FA + Tap-to-Run fix)
 
 Add `https://github.com/AmyKincaid/govee2mqtt` as the repository in the steps above. If Govee requires 2FA, start the add-on once, check your email for the code, enter it in `Govee 2FA Verification Code` and restart the add-on.
 

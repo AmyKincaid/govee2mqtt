@@ -1,4 +1,4 @@
-name: Govee to MQTT Bridge (2FA fork)
+name: Govee to MQTT Bridge (2FA + Tap-to-Run fix)
 image: ghcr.io/amykincaid/govee2mqtt-{arch}
 version: "2026.11.16-a2053168"
 slug: govee2mqtt
