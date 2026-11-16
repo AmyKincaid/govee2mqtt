@@ -17,6 +17,7 @@ here](https://developer.govee.com/reference/apply-you-govee-api-key).
 |CLI|ENV|AddOn|Purpose|
 |---|---|-----|-------|
 |`--govee-email`|`GOVEE_EMAIL`|`govee_email`|The email address you registered with your govee account|
+|`--govee-2fa-code`|`GOVEE_2FA_CODE`|`govee_2fa_code`|2FA verification code emailed by Govee (only needed when login requires 2FA)|
 |`--govee-password`|`GOVEE_PASSWORD`|`govee_password`|The password you registered for your govee account|
 |`--api-key`|`GOVEE_API_KEY`|`govee_api_key`|The API key you requested from Govee support|
 

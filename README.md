@@ -4,6 +4,29 @@ This repo provides a `govee` executable whose primary purpose is to act
 as a bridge between [Govee](https://govee.com) devices and Home Assistant,
 via the [Home Assistant MQTT Integration](https://www.home-assistant.io/integrations/mqtt/).
 
+> **Unofficial fork** of [wez/govee2mqtt](https://github.com/wez/govee2mqtt)
+> that bundles two not-yet-merged upstream fixes:
+>
+> * [#656](https://github.com/wez/govee2mqtt/pull/656) - 2FA login support for Govee accounts
+> * [#739](https://github.com/wez/govee2mqtt/pull/739) - fetch Tap-to-Run shortcuts with the account token
+>
+> The Home Assistant add-on and container images are built from this fork
+> (`ghcr.io/amykincaid/govee2mqtt`).
+
+### Installing this fork as a Home Assistant add-on
+
+1. In Home Assistant: Settings > Add-ons > Add-on Store > ⋮ > Repositories.
+2. Add `https://github.com/AmyKincaid/govee2mqtt` and install
+   "Govee to MQTT Bridge (2FA fork)". See [docs/ADDON.md](docs/ADDON.md).
+
+### 2FA login
+
+If your Govee account requires 2FA, login fails on first start with
+status 454 and Govee emails a verification code to your account.
+Enter that code in the add-on option `govee_2fa_code` (Docker:
+`GOVEE_2FA_CODE`, CLI: `--govee-2fa-code`) and restart. Once running you
+can clear the option; the code is single-use.
+
 ## Features
 
 * Robust LAN-first design. Not all of Govee's devices support LAN control,
